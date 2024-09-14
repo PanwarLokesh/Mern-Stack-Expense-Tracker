@@ -2,6 +2,7 @@ const express = require("express");
 const userRouter = require("./routes/userRouter");
 const mongoose = require("mongoose");
 const errorHandler = require("./middlewares/errorHandlerMiddleware");
+const categoryRouter = require("./routes/categoryRouter");
 
 const app = express();
 
@@ -19,6 +20,7 @@ mongoose
 app.use(express.json());
 //! Routes
 app.use("/", userRouter);
+app.use('/', categoryRouter);
 //! error handler
 app.use(errorHandler);
 
