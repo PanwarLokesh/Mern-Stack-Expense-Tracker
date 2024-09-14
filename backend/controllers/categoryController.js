@@ -28,7 +28,7 @@ const categoryController = {
       type,
       user: req.user,
     });
-    res.status(200).json(category);
+    res.status(201).json(category);
   }),
 
   //! All List
