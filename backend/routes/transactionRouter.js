@@ -13,5 +13,15 @@ transactionRouter.get(
     isAuthenticated,
     transactionController.getFilteredTransactions
 );
+transactionRouter.put(
+    "/api/v1/transactions/update/:id",
+    isAuthenticated,
+    transactionController.update
+);
+transactionRouter.delete(
+    "/api/v1/transactions/delete/:id",
+    isAuthenticated,
+    transactionController.delete
+);
 
 module.exports = transactionRouter;
