@@ -7,6 +7,7 @@ const isAuthenticated = async (req, res, next) => {
     if (err) {
       return false;
     } else {
+      
       return decoded;
     }
   });
