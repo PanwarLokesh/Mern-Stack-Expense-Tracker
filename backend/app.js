@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const errorHandler = require("./middlewares/errorHandlerMiddleware");
 const categoryRouter = require("./routes/categoryRouter");
 const transactionRouter = require("./routes/transactionRouter");
-
+const cors = require("cors");
 const app = express();
 
 const PORT = process.env.PORT || 8000;
@@ -18,11 +18,12 @@ mongoose
     console.log(err);
   });
 //! Middleware
+app.use(cors({ origin: "http://localhost:5173" }));
 app.use(express.json());
 //! Routes
 app.use("/", userRouter);
-app.use('/', categoryRouter);
-app.use('/', transactionRouter);
+app.use("/", categoryRouter);
+app.use("/", transactionRouter);
 //! error handler
 app.use(errorHandler);
 
