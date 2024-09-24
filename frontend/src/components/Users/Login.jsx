@@ -7,6 +7,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import { loginAPI } from "../../services/users/userServices";
 import AlertMessage from "../Alert/AlertMessage";
 import { loginAction } from "../../Redux/slice/authSlice";
+import { useNavigate } from "react-router-dom";
 //! validations schema for login form
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -41,7 +42,14 @@ const LoginForm = () => {
         .catch((err) => console.log(err));
     },
   });
-
+  const navigate= useNavigate();
+  useEffect(()=>{
+    setTimeout(() => {
+      if (isSuccess) {
+        navigate("/profile");
+      }
+    }, 3000);
+  },[isPending, isError, error, isSuccess])
   return (
     <form
       onSubmit={formik.handleSubmit}
