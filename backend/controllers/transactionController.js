@@ -31,7 +31,10 @@ const transactionController = {
       filters.type = type;
     }
     if (category) {
-      if (category === "Uncategorized") {
+      if (category === "All") {
+        //!  No category filter needed when filtering for 'All'
+      } else if (category === "Uncategorized") {
+        //! Filter for transactions that are specifically categorized as 'Uncategorized'
         filters.category = "Uncategorized";
       } else {
         filters.category = category;
@@ -61,9 +64,8 @@ const transactionController = {
       await Transaction.findByIdAndDelete(req.params.id);
       console.log("Transaction deleted successfully");
       res.json({ message: "Transaction deleted successfully" });
-
     }
-  })
+  }),
 };
 
 module.exports = transactionController;
