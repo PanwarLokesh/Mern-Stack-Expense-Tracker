@@ -2,26 +2,54 @@ import React, { useState } from "react";
 import { AiOutlineLock } from "react-icons/ai";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useMutation } from "@tanstack/react-query";
+import { changePasswordAPI } from "../../services/users/userServices";
+import { useDispatch } from "react-redux";
+import { logoutAction } from "../../Redux/slice/authSlice";
+import AlertMessage from "../Alert/AlertMessage";
 const validationSchema = Yup.object({
   password: Yup.string()
     .min(5, "Password must be at least 5 characters long")
     .required("Email is required"),
 });
 const UpdatePassword = () => {
+  const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
+    mutationFn: changePasswordAPI,
+    mutationKey: ["change-password"],
+  });
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      password: "123456",
+      password: "",
     },
     // Validations
     validationSchema,
     //Submit
     onSubmit: (values) => {
-      console.log(values);
+      mutateAsync(values.password)
+        .then((data) => {
+          dispatch(logoutAction());
+          localStorage.removeItem("userInfo");
+        })
+        .catch((err) => console.log(err));
     },
   });
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <h2 className="text-lg font-semibold mb-4">Change Your Password</h2>
+      {isPending && <AlertMessage type="loading" message="Updating..." />}
+      {isError && (
+        <AlertMessage
+          type="error"
+          message={
+            error?.response?.data?.message ||
+            "Something happened please try again later"
+          }
+        />
+      )}
+      {isSuccess && (
+        <AlertMessage type="success" message="Updated successfully" />
+      )}
       <form onSubmit={formik.handleSubmit} className="w-full max-w-xs">
         <div className="mb-4">
           <label
@@ -36,7 +64,7 @@ const UpdatePassword = () => {
               id="new-password"
               type="password"
               name="newPassword"
-              {...formik.getFieldProps("email")}
+              {...formik.getFieldProps("password")}
               className="outline-none flex-1"
               placeholder="Enter new password"
             />
