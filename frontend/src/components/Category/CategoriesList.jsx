@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
@@ -7,22 +7,23 @@ import {
   listCategoriesAPI,
 } from "../../services/category/categoryServices";
 import AlertMessage from "../Alert/AlertMessage";
+import { getUserFromStorage } from "../../utils/getUserFromStorage";
 
+const user= getUserFromStorage();
 const CategoriesList = () => {
   //!fetching
-  const { isError, isFetched, isLoading, data ,refetch} = useQuery({
+  const { isError, isFetched, isLoading, data, refetch } = useQuery({
     queryFn: listCategoriesAPI,
     queryKey: ["list-categories"],
   });
+  
   console.log(data);
-
   //!deleting
   const {
     mutateAsync,
     isPending,
     error: categoryErr,
     isSuccess,
-    
   } = useMutation({
     mutationFn: deleteCategoryAPI,
     mutationKey: ["delete-category"],

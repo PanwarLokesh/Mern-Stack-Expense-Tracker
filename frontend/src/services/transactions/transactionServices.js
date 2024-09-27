@@ -1,7 +1,8 @@
 import { BASE_URL } from "../../utils/url";
 import axios from "axios";
 import { getUserFromStorage } from "../../utils/getUserFromStorage";
-const token = getUserFromStorage();
+const user = getUserFromStorage();
+const token = user?.token;
 export const addTransactionAPI = async ({
   type,
   amount,

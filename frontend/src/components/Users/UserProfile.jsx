@@ -32,12 +32,14 @@ const UserProfile = () => {
         .catch((err) => console.log(err));
     },
   });
+  const user= JSON.parse(localStorage.getItem("userInfo") || null);
+  console.log("user",user);
   return (
     <>
       <div className="max-w-4xl mx-auto my-10 p-8 bg-white rounded-lg shadow-md">
         <h1 className="mb-2 text-2xl text-center font-extrabold">
           Welcome
-          {/* <span className="text-gray-500 text-sm ml-2">info@gmail.com</span> */}
+          <span className="text-gray-500 text-sm ml-2">{user?.username}</span>
         </h1>
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Update Profile

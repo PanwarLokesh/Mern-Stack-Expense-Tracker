@@ -10,7 +10,7 @@ import AlertMessage from "../Alert/AlertMessage";
 const validationSchema = Yup.object({
   password: Yup.string()
     .min(5, "Password must be at least 5 characters long")
-    .required("Email is required"),
+    .required("Password is required"),
 });
 const UpdatePassword = () => {
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({

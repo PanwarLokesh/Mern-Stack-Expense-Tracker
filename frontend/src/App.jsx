@@ -4,8 +4,8 @@ import PublicNavbar from "./components/Navbar/PublicNavbar";
 import LoginForm from "./components/Users/Login";
 import RegistrationForm from "./components/Users/Register";
 import { getUserFromStorage } from "./utils/getUserFromStorage";
-import PrivateNavbar from "../Templates/Navbar/PrivateNavbar";
-import { useSelector } from "react-redux";
+import PrivateNavbar from "./components/Navbar/PrivateNavbar";
+import { useDispatch, useSelector } from "react-redux";
 import AddCategory from "./components/Category/AddCategory";
 import CategoriesList from "./components/Category/CategoriesList";
 import UpdateCategory from "./components/Category/UpdateCategory";
@@ -15,7 +15,6 @@ import UserProfile from "./components/Users/UserProfile";
 import AuthRoute from "./components/Auth/AuthRoute";
 function App() {
   const user  = useSelector((state)=> state?.auth?.user);
-  
   return (
     <BrowserRouter>
     {user ? <PrivateNavbar/> : <PublicNavbar/>}

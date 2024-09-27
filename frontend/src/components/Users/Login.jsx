@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { loginAPI } from "../../services/users/userServices";
 import AlertMessage from "../Alert/AlertMessage";
@@ -19,6 +19,7 @@ const validationSchema = Yup.object({
 });
 
 const LoginForm = () => {
+  const navigate= useNavigate();
   const dispatch = useDispatch();
   //!using tanstack query
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
@@ -42,7 +43,7 @@ const LoginForm = () => {
         .catch((err) => console.log(err));
     },
   });
-  const navigate= useNavigate();
+  
   useEffect(()=>{
     setTimeout(() => {
       if (isSuccess) {

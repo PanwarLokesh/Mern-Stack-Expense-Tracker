@@ -3,7 +3,8 @@ import { getUserFromStorage } from '../../utils/getUserFromStorage'
 import { Navigate, useNavigate } from 'react-router-dom';
 
 const AuthRoute = ({children}) => {
-    const token = getUserFromStorage();
+    const user = getUserFromStorage();
+    const token =user.token;
     if(token){
         return children
     }
