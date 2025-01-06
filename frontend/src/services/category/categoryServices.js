@@ -3,7 +3,7 @@ import axios from "axios";
 import { getUserFromStorage } from "../../utils/getUserFromStorage";
 const user = getUserFromStorage();
 const token = user?.token;
-console.log("in service",user);
+console.log('inside category service',token);
 export const addCategoryAPI = async ({ name, type }) => {
   const response = await axios.post(
     `${BASE_URL}/categories/create`,
@@ -23,9 +23,10 @@ export const addCategoryAPI = async ({ name, type }) => {
 export const listCategoriesAPI = async () => {
   const response = await axios.get(`${BASE_URL}/categories/lists`, {
     headers: {
-      Authentication: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
+  console.log(user);
   return response.data;
 };
 
@@ -38,7 +39,7 @@ export const updateCategoryAPI = async ({ name, type, id }) => {
     },
     {
       headers: {
-        Authentication: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -50,7 +51,7 @@ export const deleteCategoryAPI = async ( id ) => {
     `${BASE_URL}/categories/delete/${id}`,
     {
       headers: {
-        Authentication: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );

@@ -24,6 +24,7 @@ const TransactionList = () => {
     isLoading,
     data: transactions,
     refetch,
+    error,
   } = useQuery({
     queryFn: () => listTransactionsAPI(filters),
     queryKey: ["list-transactions", filters],

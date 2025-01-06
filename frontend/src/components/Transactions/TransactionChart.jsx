@@ -12,6 +12,7 @@ const TransactionChart = () => {
     isLoading,
     data: transactions,
     refetch,
+    error,
   } = useQuery({
     queryFn: listTransactionsAPI,
     queryKey: ["list-transactions"],

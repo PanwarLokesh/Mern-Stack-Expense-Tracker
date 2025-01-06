@@ -62,7 +62,6 @@ const transactionController = {
     const transaction = await Transaction.findById(req.params.id);
     if (transaction && transaction.user.toString() === req.user.toString()) {
       await Transaction.findByIdAndDelete(req.params.id);
-      console.log("Transaction deleted successfully");
       res.json({ message: "Transaction deleted successfully" });
     }
   }),

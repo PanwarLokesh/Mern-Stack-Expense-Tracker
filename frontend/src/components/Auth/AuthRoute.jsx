@@ -4,12 +4,12 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 const AuthRoute = ({children}) => {
     const user = getUserFromStorage();
-    const token =user.token;
+    const token =user?.token;
     if(token){
         return children
     }
     else{
-        return <Navigate to={'/login'}/>
+        return <Navigate to='/login'/>
     }
 }
 

@@ -50,7 +50,7 @@ const usersController = {
     }
     //! generate token
     const token = jwt.sign({ id: user._id }, "mysecretkey", {
-      expiresIn: "3d",
+      expiresIn: "30d",
     });
 
     res.json({
@@ -82,7 +82,7 @@ const usersController = {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(newPassword, salt);
     user.password = hashedPassword;
-    user.save({
+    await user.save({
       validateBeforeSave: false,
     });
     res.json({ message: "Password changed successfully" });

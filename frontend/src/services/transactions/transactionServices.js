@@ -21,7 +21,7 @@ export const addTransactionAPI = async ({
     },
     {
       headers: {
-        Authentication: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -32,7 +32,7 @@ export const listTransactionsAPI = async ({startDate, endDate, type, category}) 
     const response = await axios.get(`${BASE_URL}/transactions/lists`, {
         params:{startDate, endDate, type, category},
         headers: {
-        Authentication: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
       },
     });
     return response.data;

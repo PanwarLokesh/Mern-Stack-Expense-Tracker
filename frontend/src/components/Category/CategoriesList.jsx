@@ -10,14 +10,14 @@ import AlertMessage from "../Alert/AlertMessage";
 import { getUserFromStorage } from "../../utils/getUserFromStorage";
 
 const user= getUserFromStorage();
+console.log('inside categories list',user);
 const CategoriesList = () => {
   //!fetching
-  const { isError, isFetched, isLoading, data, refetch } = useQuery({
+  const { isError, isFetched, isLoading, data, refetch,error } = useQuery({
     queryFn: listCategoriesAPI,
     queryKey: ["list-categories"],
   });
   
-  console.log(data);
   //!deleting
   const {
     mutateAsync,

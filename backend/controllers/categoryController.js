@@ -12,7 +12,7 @@ const categoryController = {
     }
     const normalizedName = name.toLowerCase();
     const validTypes = ["income", "expense"];
-    if (!validTypes.includes(type)) {
+    if (!validTypes.includes(type.toLowerCase())) {
       throw new Error("Invalid Category type " + type);
     }
 
@@ -39,12 +39,12 @@ const categoryController = {
   }),
 
   update: asyncHandler(async (req, res) => {
-    const {id:categoryId} = req.params;
+    const {categoryId} = req.params;
     const { type, name } = req.body;
     const normalizedName = name.toLowerCase();
     const category = await Category.findById(categoryId);
     if (!category && category.user.toString() !== req.user.toString()) {
-      res.json({ message: "Category not found or user not authorized" });
+      res.json("Category not found or user not authorized");
     }
     const oldName = category.name;
     category.name = normalizedName|| category.name; ;

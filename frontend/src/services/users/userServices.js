@@ -27,7 +27,7 @@ export const changePasswordAPI = async (newPassword) => {
     },
     {
       headers: {
-        Authentication: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );
@@ -43,7 +43,7 @@ export const updateProfileAPI = async ({ email, username }) => {
     },
     {
       headers: {
-        Authentication: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
   );

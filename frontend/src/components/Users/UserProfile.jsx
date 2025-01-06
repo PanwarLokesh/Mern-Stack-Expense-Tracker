@@ -6,7 +6,8 @@ import { useMutation } from "@tanstack/react-query";
 import { updateProfileAPI } from "../../services/users/userServices";
 import { useDispatch } from "react-redux";
 import AlertMessage from "../Alert/AlertMessage";
-
+import { getUserFromStorage } from "../../utils/getUserFromStorage";
+const user = getUserFromStorage();
 const UserProfile = () => {
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: updateProfileAPI,
@@ -26,14 +27,11 @@ const UserProfile = () => {
         .then((data) => {
           console.log(data);
 
-          // dispatch(logoutAction());
-          // localStorage.removeItem("userInfo");
         })
         .catch((err) => console.log(err));
     },
   });
-  const user= JSON.parse(localStorage.getItem("userInfo") || null);
-  console.log("user",user);
+ 
   return (
     <>
       <div className="max-w-4xl mx-auto my-10 p-8 bg-white rounded-lg shadow-md">

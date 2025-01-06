@@ -25,7 +25,7 @@ const validationSchema = Yup.object({
 });
 
 const TransactionForm = () => {
-  const { isError, isFetched, isLoading, data, refetch } = useQuery({
+  const { isError, isFetched, isLoading, data, refetch ,error} = useQuery({
     queryFn: listCategoriesAPI,
     queryKey: ["list-categories"],
   });
